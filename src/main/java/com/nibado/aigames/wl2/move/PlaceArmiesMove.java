@@ -8,9 +8,9 @@
  * @License MIT License (http://opensource.org/Licenses/MIT)
  */
 
-package com.nibado.test.wlai.move;
+package com.nibado.aigames.wl2.move;
 
-import com.nibado.test.wlai.map.Region;
+import com.nibado.aigames.wl2.map.Region;
 
 /**
  * This Move is used in the first part of each round. It represents what Region is increased

@@ -8,7 +8,7 @@
  * @License MIT License (http://opensource.org/Licenses/MIT)
  */
 
-package com.nibado.test.wlai.map;
+package com.nibado.aigames.wl2.map;
 
 import java.util.LinkedList;
 

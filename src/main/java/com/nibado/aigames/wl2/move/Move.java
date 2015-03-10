@@ -8,7 +8,7 @@
  * @License MIT License (http://opensource.org/Licenses/MIT)
  */
 
-package com.nibado.test.wlai.move;
+package com.nibado.aigames.wl2.move;
 
 public class Move {
 

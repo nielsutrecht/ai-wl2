@@ -8,13 +8,13 @@
  * @License MIT License (http://opensource.org/Licenses/MIT)
  */
 
-package com.nibado.test.wlai.bot;
+package com.nibado.aigames.wl2.bot;
 
 import java.util.ArrayList;
 
-import com.nibado.test.wlai.map.Region;
-import com.nibado.test.wlai.move.AttackTransferMove;
-import com.nibado.test.wlai.move.PlaceArmiesMove;
+import com.nibado.aigames.wl2.map.Region;
+import com.nibado.aigames.wl2.move.AttackTransferMove;
+import com.nibado.aigames.wl2.move.PlaceArmiesMove;
 
 public interface Bot {
 

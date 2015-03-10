@@ -8,7 +8,7 @@
  * @License MIT License (http://opensource.org/Licenses/MIT)
  */
 
-package com.nibado.test.wlai.bot;
+package com.nibado.aigames.wl2.bot;
 
 /**
  * This is a simple bot that does random (but correct) moves.
@@ -23,9 +23,9 @@ package com.nibado.test.wlai.bot;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import com.nibado.test.wlai.map.Region;
-import com.nibado.test.wlai.move.AttackTransferMove;
-import com.nibado.test.wlai.move.PlaceArmiesMove;
+import com.nibado.aigames.wl2.map.Region;
+import com.nibado.aigames.wl2.move.AttackTransferMove;
+import com.nibado.aigames.wl2.move.PlaceArmiesMove;
 
 public class BotStarter implements Bot
 {
