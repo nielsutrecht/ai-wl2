@@ -21,7 +21,7 @@ package com.nibado.aigames.wl2.bot;
  */
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Set;
 
 import com.nibado.aigames.wl2.map.Region;
 import com.nibado.aigames.wl2.move.AttackTransferMove;
@@ -58,13 +58,13 @@ public class BotStarter implements Bot
         final String myName = state.getMyPlayerName();
         final int armies = 2;
         int armiesLeft = state.getStartingArmies();
-        final LinkedList<Region> visibleRegions = state.getVisibleMap().getRegions();
+        final Set<Region> visibleRegions = state.getVisibleMap().getRegions();
 
         while (armiesLeft > 0)
         {
             final double rand = Math.random();
             final int r = (int) (rand * visibleRegions.size());
-            final Region region = visibleRegions.get(r);
+            final Region region = null;//visibleRegions.get(r);
 
             if (region.ownedByPlayer(myName))
             {

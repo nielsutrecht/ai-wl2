@@ -10,7 +10,9 @@
 
 package com.nibado.aigames.wl2.map;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Region {
 
@@ -73,6 +75,22 @@ public class Region {
         return false;
     }
 
+    public boolean sameSuperRegion(final Region other) {
+        return superRegion.getId() == other.superRegion.getId();
+    }
+
+    public List<Region> getNeighborsInDifferentSuperRegion() {
+        final List<Region> result = new ArrayList<>();
+
+        for (final Region neighbor : neighbors) {
+            if (!sameSuperRegion(neighbor)) {
+                result.add(neighbor);
+            }
+        }
+
+        return result;
+    }
+
     /**
      * @param armies Sets the number of armies that are on this Region
      */
@@ -122,4 +140,25 @@ public class Region {
         return playerName;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final Region other = (Region) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
 }

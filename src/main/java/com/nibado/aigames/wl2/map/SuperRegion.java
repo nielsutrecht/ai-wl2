@@ -10,19 +10,20 @@
 
 package com.nibado.aigames.wl2.map;
 
-import java.util.LinkedList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SuperRegion {
 
     private final int id;
     private final int armiesReward;
-    private final LinkedList<Region> subRegions;
+    private final Set<Region> subRegions;
 
     public SuperRegion(final int id, final int armiesReward)
     {
         this.id = id;
         this.armiesReward = armiesReward;
-        subRegions = new LinkedList<Region>();
+        subRegions = new HashSet<>();
     }
 
     public void addSubRegion(final Region subRegion)
@@ -36,13 +37,22 @@ public class SuperRegion {
      */
     public String ownedByPlayer()
     {
-        final String playerName = subRegions.getFirst().getPlayerName();
+        String previousPlayerName = null;
         for (final Region region : subRegions)
         {
-            if (!playerName.equals(region.getPlayerName()))
+            if (region.getPlayerName() == null) {
                 return null;
+            }
+            if (previousPlayerName == null) {
+                previousPlayerName = region.getPlayerName();
+                continue;
+            }
+
+            if (!region.getPlayerName().equals(previousPlayerName)) {
+                return null;
+            }
         }
-        return playerName;
+        return previousPlayerName;
     }
 
     /**
@@ -62,7 +72,29 @@ public class SuperRegion {
     /**
      * @return A list with the Regions that are part of this SuperRegion
      */
-    public LinkedList<Region> getSubRegions() {
+    public Set<Region> getSubRegions() {
         return subRegions;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final SuperRegion other = (SuperRegion) obj;
+        if (id != other.id)
+            return false;
+        return true;
     }
 }

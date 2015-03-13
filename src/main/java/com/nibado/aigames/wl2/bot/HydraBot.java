@@ -3,50 +3,34 @@ package com.nibado.aigames.wl2.bot;
 import java.util.ArrayList;
 
 import com.nibado.aigames.wl2.map.Region;
-import com.nibado.aigames.wl2.map.SuperRegion;
 import com.nibado.aigames.wl2.move.AttackTransferMove;
 import com.nibado.aigames.wl2.move.PlaceArmiesMove;
 
 public class HydraBot implements Bot {
-    private SuperRegion favoriteSuperRegion;
 
-    @Override
-    public Region getStartingRegion(final BotState state, final Long timeOut) {
-        if (favoriteSuperRegion == null) {
-            favoriteSuperRegion = getBestSuperRegion(state);
-        }
-        for (final Region r : state.getPickableStartingRegions()) {
-            if (favoriteSuperRegion.getSubRegions().contains(r)) {
-                return r;
-            }
-        }
+    private final RegionPicker picker;
+    private final Strategy strategy;
 
-        // TODO Auto-generated method stub
-        return null;
+    public HydraBot(final RegionPicker picker, final Strategy strategy) {
+        this.picker = picker;
+        this.strategy = strategy;
     }
 
     @Override
     public ArrayList<PlaceArmiesMove> getPlaceArmiesMoves(final BotState state, final Long timeOut) {
-        // TODO Auto-generated method stub
-        return null;
+        strategy.update(state, timeOut);
+
+        return strategy.getPlaceArmiesMoves();
     }
 
     @Override
     public ArrayList<AttackTransferMove> getAttackTransferMoves(final BotState state, final Long timeOut) {
-        // TODO Auto-generated method stub
-        return null;
+        return strategy.getAttackTransferMoves();
     }
 
-    private SuperRegion getBestSuperRegion(final BotState state) {
-        SuperRegion picked = null;
-        for (final SuperRegion superRegion : state.getVisibleMap().getSuperRegions()) {
-            if (picked == null || superRegion.getArmiesReward() > picked.getArmiesReward()) {
-                picked = superRegion;
-            }
-        }
-
-        return picked;
-
+    @Override
+    public Region getStartingRegion(final BotState state, final Long timeOut) {
+        return picker.getStartingRegion(state, timeOut);
     }
 
 }

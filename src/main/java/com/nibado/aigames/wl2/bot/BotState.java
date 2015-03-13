@@ -11,6 +11,8 @@
 package com.nibado.aigames.wl2.bot;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.nibado.aigames.wl2.map.Map;
 import com.nibado.aigames.wl2.map.Region;
@@ -28,7 +30,7 @@ public class BotState {
     private Map visibleMap; //This map represents everything the player can see, updated at the end of each round.
 
     private ArrayList<Region> pickableStartingRegions; //list of regions the player can choose the start from
-    private ArrayList<Region> wastelands; //wastelands, i.e. neutral regions with a larger amount of armies on them. Given before the picking of starting regions
+    private Set<Region> wastelands; //wastelands, i.e. neutral regions with a larger amount of armies on them. Given before the picking of starting regions
 
     private final ArrayList<Move> opponentMoves; //list of all the opponent's moves, reset at the end of each round
 
@@ -129,7 +131,7 @@ public class BotState {
         }
         else if (mapInput[1].equals("wastelands"))
         {
-            wastelands = new ArrayList<Region>();
+            wastelands = new HashSet<>();
             for (i = 2; i < mapInput.length; i++)
             {
                 try {
@@ -183,7 +185,7 @@ public class BotState {
         final ArrayList<Region> unknownRegions = new ArrayList<Region>();
 
         //remove regions which are unknown.
-        for (final Region region : visibleMap.regions)
+        for (final Region region : visibleMap.getRegions())
             if (region.getPlayerName().equals("unknown"))
                 unknownRegions.add(region);
         for (final Region unknownRegion : unknownRegions)
@@ -263,8 +265,20 @@ public class BotState {
         return pickableStartingRegions;
     }
 
-    public ArrayList<Region> getWasteLands() {
+    public Set<Region> getWasteLands() {
         return wastelands;
+    }
+
+    public int getMaxRounds() {
+        return maxRounds;
+    }
+
+    public long getTotalTimebank() {
+        return totalTimebank;
+    }
+
+    public long getTimePerMove() {
+        return timePerMove;
     }
 
 }

@@ -10,23 +10,25 @@
 
 package com.nibado.aigames.wl2.map;
 
-import java.util.LinkedList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Map {
 
-    public LinkedList<Region> regions;
-    public LinkedList<SuperRegion> superRegions;
+    private final Set<Region> regions;
+    private final Set<SuperRegion> superRegions;
 
     public Map()
     {
-        this.regions = new LinkedList<Region>();
-        this.superRegions = new LinkedList<SuperRegion>();
+        this.regions = new HashSet<>();
+        this.superRegions = new HashSet<>();
     }
 
-    public Map(final LinkedList<Region> regions, final LinkedList<SuperRegion> superRegions)
+    public Map(final List<Region> regions, final List<SuperRegion> superRegions)
     {
-        this.regions = regions;
-        this.superRegions = superRegions;
+        this.regions = new HashSet<>(regions);
+        this.superRegions = new HashSet<>(superRegions);
     }
 
     /**
@@ -35,12 +37,6 @@ public class Map {
      */
     public void add(final Region region)
     {
-        for (final Region r : regions)
-            if (r.getId() == region.getId())
-            {
-                System.err.println("Region cannot be added: id already exists.");
-                return;
-            }
         regions.add(region);
     }
 
@@ -50,12 +46,6 @@ public class Map {
      */
     public void add(final SuperRegion superRegion)
     {
-        for (final SuperRegion s : superRegions)
-            if (s.getId() == superRegion.getId())
-            {
-                System.err.println("SuperRegion cannot be added: id already exists.");
-                return;
-            }
         superRegions.add(superRegion);
     }
 
@@ -86,14 +76,14 @@ public class Map {
     /**
      * @return : the list of all Regions in this map
      */
-    public LinkedList<Region> getRegions() {
+    public Set<Region> getRegions() {
         return regions;
     }
 
     /**
      * @return : the list of all SuperRegions in this map
      */
-    public LinkedList<SuperRegion> getSuperRegions() {
+    public Set<SuperRegion> getSuperRegions() {
         return superRegions;
     }
 
